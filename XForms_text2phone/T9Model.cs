@@ -5,11 +5,12 @@ using Xamarin.Forms;
 namespace XForms_text2phone {
 	class T9Model : INotifyPropertyChanged {
 		public const int PHONE_NUMBER_LENGTH = 9;
-		
+
 		private String text = "";
 		private String number = "";
 		private bool isValid = false;
-		//private String remainingCharsLabel = "Saisissez un texte court(%d caractères max)";
+		private int remainingChars = PHONE_NUMBER_LENGTH;
+		private const String remainingCharsLabel = "Saisissez un texte court\n{0:d} caractère(s) restant(s)";
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,6 +26,7 @@ namespace XForms_text2phone {
 					if (PropertyChanged != null) {
 						PropertyChanged(this, new PropertyChangedEventArgs("Text"));
 					}
+					UpdateRemainingChars();
 				}
 			}
 			get {
@@ -44,16 +46,36 @@ namespace XForms_text2phone {
 			}
 		}
 
+
+		public int RemainingChars {
+			get {
+				return remainingChars;
+			}
+		}
+
+		public String RemainingCharsLabel {
+			get {
+				return String.Format(remainingCharsLabel, remainingChars);
+			}
+		}
+
+		private void UpdateRemainingChars() {
+			remainingChars = PHONE_NUMBER_LENGTH - text.Length;
+			if (PropertyChanged != null) {
+				PropertyChanged(this, new PropertyChangedEventArgs("RemainingCharsLabel"));
+			}
+		}
+
 		private void TextToNumber() {
 			// TODO: Make the conversion and validateNumber
 			number = text;
-			validateNumber();
+			ValidateNumber();
 			if (PropertyChanged != null) {
 				PropertyChanged(this, new PropertyChangedEventArgs("Number"));
 			}
 		}
 
-		private void validateNumber() {
+		private void ValidateNumber() {
 			// TODO: Make the validation and update isValid
 			if (text != "") {
 				if (text.Length == T9Model.PHONE_NUMBER_LENGTH) {

@@ -16,16 +16,10 @@ namespace XForms_text2phone {
 
 		void Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e) {
 			// This is preventing the use from dialing an invalid phone number
-			if (myDial.Text.Length == T9Model.PHONE_NUMBER_LENGTH)
+			if (myDial.IsValid)
 				dialButton.IsEnabled = true;
 			else 
 				dialButton.IsEnabled = false;
-			/*
-			 * This check is already done on the model-side
-			 * But we need this to prevent the user from adding more characters to the Entry
-			*/
-			//if (textEntry.Text.Length > T9Model.PHONE_NUMBER_LENGTH)
-			//	textEntry.Text = textEntry.Text.Remove(textEntry.Text.Length - 1);
 		}
 
 		public async void onDialButtonClicked(object sender, EventArgs e) {
