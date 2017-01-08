@@ -16,7 +16,8 @@
 		<Entry
 			x:Name="inputString"
 			Placeholder="MYTEXTPHONENUMBER"
-			HorizontalTextAlignment="Center"/>
+			HorizontalTextAlignment="Center"
+			Text="1234567890"/>
 		<Button
 				x:Name="buttonSubmit"
 				Text="Valider"
