@@ -16,14 +16,14 @@ namespace XForms_text2phone {
 
 		void Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e) {
 			// This is preventing the use from dialing an invalid phone number
-			if (myDial.IsValid)
+			if (myDial.IsNumberValid)
 				dialButton.IsEnabled = true;
 			else 
 				dialButton.IsEnabled = false;
 		}
 
 		public async void onDialButtonClicked(object sender, EventArgs e) {
-			if (myDial.IsValid) {
+			if (myDial.IsNumberValid) {
 				var answer = await DisplayAlert(myDial.Number, "Would you like to call " + myDial.Number + " ?", "Yes", "No");
 				Debug.WriteLine("Dialing " + myDial.Number + ": " + answer);
 
