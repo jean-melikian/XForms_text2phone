@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage 
+<ContentPage
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 		xmlns:local="clr-namespace:XForms_text2phone" 
 		x:Class="XForms_text2phone.HomePage"
 		Title="Text 2 Phone Number">
 	<StackLayout
-			Orientation="Vertical"
-			VerticalOptions="Center"
-			Spacing="30"
-			Padding="16">
-		<Label Text="Saisissez un text court:"
-			VerticalOptions="Center" 
-			HorizontalOptions="Center" />
-		<Entry
-			x:Name="inputString"
-			Placeholder="MYTEXTPHONENUMBER"
-			HorizontalTextAlignment="Center"
-			Text="1234567890"/>
+		Orientation="Vertical"
+		VerticalOptions="FillAndExpand"
+		Spacing="12"
+		Padding="16">
+		<Label
+			Text="{Binding RemainingCharsLabel}"
+			VerticalOptions="Start"
+			HorizontalOptions="Center"
+			HorizontalTextAlignment="Center"/>
 		<Button
-				x:Name="buttonSubmit"
-				Text="Valider"
+					x:Name="dialButton"
+					Text="Composer le numéro"
+					Clicked="onDialButtonClicked" />
+		
+		<ScrollView
+				Orientation="Vertical"
+				VerticalOptions="FillAndExpand">
+			<StackLayout
+				Orientation="Vertical"
+				VerticalOptions="Center">
+			
+				<Label
+					x:Name="numberLabel"
+					Text="{Binding Number}"
+					HorizontalOptions="FillAndExpand"
+					HorizontalTextAlignment="Center" />
+
+				<Entry
+					x:Name="textEntry"
+					Text="{Binding Text, Mode=TwoWay}"
+					TextChanged="Handle_TextChanged"
+					VerticalOptions="Center"
+					HorizontalOptions="FillAndExpand"
+					HorizontalTextAlignment="Center" />
 				
-				Clicked="onButtonSubmitClicked" />
+			</StackLayout>
+		</ScrollView>
 	</StackLayout>
 </ContentPage>
